@@ -52,7 +52,8 @@ int main()
     led2 = 0;
     time_up1.attach(&b_led1, 450ms);
     time_up2.attach(&b_led2, 100ms);
-    time_up3.attach(&b_led3, 1000ms);
     while (true) {
+        b_led3();
+        ThisThread::sleep_for(50ms);
     }
 }
