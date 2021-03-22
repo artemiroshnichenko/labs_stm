@@ -1,0 +1,74 @@
+//lab5.2
+#include "mbed.h"
+PwmOut servo1(D6);
+PwmOut servo2(A0);
+Ticker time_up1;
+Ticker time_up2;
+
+int myPulsePWM_1 = 500;
+int myPulsePWM_2 = 2000;
+bool flag = true;
+
+void serv_1(){
+        myPulsePWM_1 += 100;  
+        if (myPulsePWM_1 >= 2000){
+            myPulsePWM_1 = 500;
+        }
+}
+
+void serv_2(){
+    myPulsePWM_2 -= 100;
+        if (myPulsePWM_2 <= 500){
+            myPulsePWM_2 = 2000;
+        }
+}
+
+void pwm(){
+    
+
+}
+
+int main() {
+    time_up1.attach(&serv_1, 500ms);
+    time_up2.attach(&serv_2, 500ms);
+    while(1){
+        servo1.pulsewidth_us(myPulsePWM_1);
+        servo2.pulsewidth_us(myPulsePWM_2);
+        ThisThread::sleep_for(50ms);
+    }
+}
+//lab5.1
+/*
+#include "mbed.h"
+PwmOut servo(D6);
+Ticker time_up1;
+Ticker time_up2;
+
+int myPulsePWM = 500;
+bool flag = true;
+
+void serv_1(){
+    if (flag){
+        myPulsePWM += 100;  
+        if (myPulsePWM >= 1500){
+            flag = false;
+        }
+    }
+    else{
+        myPulsePWM -= 100;
+        if (myPulsePWM <= 500){
+            flag = true;
+        }
+    }
+}
+
+void pwm(){
+    servo.pulsewidth_us(myPulsePWM);
+}
+
+int main() {
+    time_up1.attach(&serv_1, 500ms);
+    time_up2.attach(&pwm, 500ms);
+    while(1){
+    }
+}*/
