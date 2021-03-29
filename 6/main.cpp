@@ -15,6 +15,8 @@ void un(){
 
 int main()
 {
+    char msg[] = "u - Led up, d - Led down, h - counter\n";
+    pc.write(msg, sizeof(msg));
     button.fall(un);
     char *c = new char[1];
     string s;
